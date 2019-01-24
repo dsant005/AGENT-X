@@ -1,0 +1,30 @@
+{
+    "manifest_version": 2,
+    "name": "AGENT X",
+    "description": "Label extension for use with the AIST Agent",
+    "version": "0.2",
+    "browser_action": {
+        "default_popup": "index.html"
+    },
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+    "web_accessible_resources": [
+        "*"
+    ],
+    "content_scripts": [
+        {
+          "matches": [
+            "http://*/*",
+            "https://*/*"
+          ],
+          "js": [
+            "jquery.min.js",
+            "scraper.js",
+            "background.js"
+          ]
+        }
+      ],
+      "permissions": [
+        "activeTab",
+        "storage"
+      ]
+}

@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+.main-container .content-container .content-area {
+    padding-top:0px;
+}
+
+/* Remove Chrome's blue border on clicks */
+button:focus {
+    outline:0;
+}
+
+.btn-sm.btn-icon {
+    padding: 0 0.25rem;
+    margin: 0;
+}

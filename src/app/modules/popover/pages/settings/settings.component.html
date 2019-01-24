@@ -1,0 +1,51 @@
+<div class="card">
+  <div class="card-block">
+    <h4 class="card-title">Change User Settings</h4>
+    <div class="alert alert-warning" role="alert">
+      <div class="alert-items">
+        <div class="alert-item static">
+          <div class="alert-icon-wrapper">
+            <clr-icon class="alert-icon" shape="exclamation-triangle"></clr-icon>
+          </div>
+          <span class="alert-text">These settings are stored in cache for this instance of Chrome only.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <form clrForm>
+      <clr-input-container>
+        <label>Page Analysis API Host</label>
+        <input clrInput type="text" name="example" placeholder="http://localhost:9000/"  size="35" />
+      </clr-input-container>
+      <section class="form-block">
+        <div class="form-group">
+          <label>Auto hide</label>
+          <div class="toggle-switch">
+            <input type="checkbox" id="toggle_4">
+            <label for="toggle_4"></label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Auto Overlay <clr-signpost>
+              <clr-signpost-content *clrIfOpen>
+                  <h3>Default Signpost</h3>
+                  <p>Position: <code class="clr-code">right-middle</code></p>
+              </clr-signpost-content>
+          </clr-signpost></label>
+          <div class="toggle-switch">
+            <input type="checkbox" id="toggle_5">
+            <label for="toggle_5"></label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Keyboard Shortcuts</label>
+          <div class="toggle-switch">
+            <input type="checkbox" id="toggle_6">
+            <label for="toggle_6"></label>
+          </div>
+        </div>
+      </section>
+    </form>
+  </div>
+</div>
