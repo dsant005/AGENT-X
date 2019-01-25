@@ -7,6 +7,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             console.log('Recieved start signal', sender);
             results = { name: 'completePageAnalysis', payload: window.aist_scrape() }
             break;
+        case 'startSelectorMode':
+            console.log('SELECTOR MODE');
+            results = { name: 'inSelectorMode', payload: null };
+            window.agentx_selector();
+            break;
         default:
             console.error('Should not be here!');
     }

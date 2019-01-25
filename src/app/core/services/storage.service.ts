@@ -26,7 +26,6 @@ export class StorageService {
   }
 
   getObject(key: string): any {
-    console.log(this.storage.getItem(key));
     return JSON.parse(this.storage.getItem(key));
   }
 

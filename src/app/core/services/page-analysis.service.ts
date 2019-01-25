@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable, Subject } from 'rxjs';
@@ -15,7 +15,7 @@ export class PageAnalysisService {
 
   scrape: Subject<Scrape>;
 
-  constructor(private http: HttpClient, private storage: StorageService) {
+  constructor(private http: HttpClient, private storage: StorageService, private zone: NgZone) {
     this.scrape = new Subject<Scrape>();
     this.storage.setLocalStorage();
   }
@@ -25,7 +25,7 @@ export class PageAnalysisService {
     chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
       const activeTab = tabs[0];
       console.log('getting', activeTab.url);
-      subject.next(this.storage.getObject(activeTab.url));
+      this.zone.run(() => subject.next(this.storage.getObject(activeTab.url)));
     });
     return subject.asObservable();
   }
@@ -65,7 +65,7 @@ export class PageAnalysisService {
       switch (msg.name) {
         case 'completePageAnalysis':
           console.log('Publishing response', msg.payload);
-          this.scrape.next(msg.payload);
+          this.zone.run(() => this.scrape.next(msg.payload));
           break;
       }
     }

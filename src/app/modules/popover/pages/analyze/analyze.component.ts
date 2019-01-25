@@ -74,20 +74,22 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
 
   analysisCompleted(analysis: Analysis) {
     console.log(analysis);
+    this.ref.reattach();
     this.pageAnalysisService.storeAnalysis(analysis);
     this.analysis = analysis;
     this.analysisComplete = true;
     this.inProgress = false;
     this.pageTitle = DEFAULT_PAGE_TITLE;
-    this.ref.detectChanges();
+    this.ref.markForCheck();
   }
 
   resetPage() {
+    this.ref.reattach();
     this.pageTitle = DEFAULT_PAGE_TITLE;
     this.analysisComplete = false;
     this.inProgress = false;
     this.analysis = null;
-    this.ref.detectChanges();
+    this.ref.markForCheck();
   }
 
   dismissError() {

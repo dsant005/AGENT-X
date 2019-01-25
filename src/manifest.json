@@ -16,9 +16,13 @@
             "http://*/*",
             "https://*/*"
           ],
+          "css": [
+            "agentx-style.css"
+          ],
           "js": [
             "jquery.min.js",
             "scraper.js",
+            "selector.js",
             "background.js"
           ]
         }

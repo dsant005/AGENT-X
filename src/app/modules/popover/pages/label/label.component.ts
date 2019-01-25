@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SelectorService } from '@app/core/services/selector.service';
 
 @Component({
   selector: 'app-label',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LabelComponent implements OnInit {
 
-  constructor() { }
+  constructor(private selectorService: SelectorService) { }
 
   ngOnInit() {
+  }
+
+  startSelectorMode(): void {
+    this.selectorService.startLabelMode();
   }
 
 }

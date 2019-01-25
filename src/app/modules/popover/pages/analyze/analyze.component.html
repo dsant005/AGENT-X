@@ -34,23 +34,23 @@
   <div class="card-block">
     <clr-tree-node [clrExpanded]="true">
       Page Analysis
-      <clr-tree-node [clrExpanded]="true">
+      <clr-tree-node>
         Cancels ({{analysis.cancels.length}})
         <clr-tree-node *ngFor="let cancel of analysis.cancels">{{cancel}}</clr-tree-node>
       </clr-tree-node>
-      <clr-tree-node [clrExpanded]="true">
+      <clr-tree-node>
         Commits ({{analysis.commits.length}})
         <clr-tree-node *ngFor="let commit of analysis.commits">{{commit}}</clr-tree-node>
       </clr-tree-node>
-      <clr-tree-node [clrExpanded]="true">
+      <clr-tree-node>
         Error Messages ({{analysis.errorMessages.length}})
         <clr-tree-node *ngFor="let errorMessage of analysis.errorMessages">{{errorMessage}}</clr-tree-node>
       </clr-tree-node>
-      <clr-tree-node [clrExpanded]="true">
+      <clr-tree-node>
         Label Candidates ({{analysis.labelCandidates.length}})
         <clr-tree-node *ngFor="let labelCandidate of analysis.labelCandidates">{{labelCandidate}}</clr-tree-node>
       </clr-tree-node>
-      <clr-tree-node [clrExpanded]="true">
+      <clr-tree-node>
         Page Titles ({{analysis.pageTitles.length}})
         <clr-tree-node *ngFor="let pageTitle of analysis.pageTitles">{{pageTitle}}</clr-tree-node>
       </clr-tree-node>

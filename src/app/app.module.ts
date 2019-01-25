@@ -7,6 +7,8 @@ import { AppComponent } from '@app/app.component';
 import { PopoverModule } from '@app/modules/popover/popover.module';
 import { CoreModule } from './core/core.module';
 
+import { ClarityModule } from '@clr/angular';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -15,10 +17,10 @@ import { CoreModule } from './core/core.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ClarityModule,
     PopoverModule,
     CoreModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
