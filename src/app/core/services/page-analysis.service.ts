@@ -54,7 +54,7 @@ export class PageAnalysisService {
   analyzePage(): Observable < Scrape > {
     chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
       const activeTab = tabs[0];
-      chrome.tabs.sendMessage(activeTab.id, 'startPageAnalysis', (msg) => this.completeScrape(msg));
+      chrome.tabs.sendMessage(activeTab.id, { name: 'startPageAnalysis' }, (msg) => this.completeScrape(msg));
     });
     return this.scrape;
   }

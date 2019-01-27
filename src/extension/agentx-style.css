@@ -1,4 +1,39 @@
 .agentx-active {
-    border: 3px solid red !important;
+    border: 3px solid #e12200 !important;
     cursor: crosshair;
+}
+
+.agentx-tag {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: #e12200;
+    color: white;
+    padding: 2px 5px;
+    border-bottom-right-radius: 3px;
+    z-index: 99999;
+}
+
+.agentx-active.agentx-label {
+    border-color: #0079b8 !important;
+}
+
+.agentx-active.agentx-error {
+    border-color: #e12200 !important;
+}
+
+.agentx-active.agentx-commit {
+    border-color: #2f8400 !important;
+}
+
+.agentx-tag.agentx-label {
+    background-color: #0079b8;
+}
+
+.agentx-tag.agentx-error {
+    background-color: #e12200;
+}
+
+.agentx-tag.agentx-commit {
+    background-color: #2f8400;
 }

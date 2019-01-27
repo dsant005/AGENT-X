@@ -1,7 +1,12 @@
 console.log('Background loaded.')
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     let results = { name: 'failure', payload: {} }
-    switch (request) {
+
+    function sendAnalysis() {
+        
+    }
+
+    switch (request.name) {
         case 'startPageAnalysis':
             // do scrape
             console.log('Recieved start signal', sender);
@@ -10,7 +15,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         case 'startSelectorMode':
             console.log('SELECTOR MODE');
             results = { name: 'inSelectorMode', payload: null };
-            window.agentx_selector();
+            window.agentx_selector(request.payload);
             break;
         default:
             console.error('Should not be here!');

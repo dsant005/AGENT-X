@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 
@@ -20,10 +20,11 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
   public analysisComplete = false;
   public error: Error;
   public analysis: Analysis;
+  public modal = { opened: false };
   private scrapeSubscription: Subscription;
   private analysisSubscription: Subscription;
 
-  constructor(private pageAnalysisService: PageAnalysisService, private ref: ChangeDetectorRef) { }
+  constructor(private pageAnalysisService: PageAnalysisService) { }
 
   ngOnInit() {
     this.pageAnalysisService.getPreviousAnalysis().subscribe(analysis => {
@@ -31,7 +32,6 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
         this.analysis = analysis;
         this.analysisComplete = true;
         console.log('init', this.analysis);
-        this.ref.detectChanges();
       }
     });
   }
@@ -56,7 +56,6 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
     // at this point this is outside the NGZone since it was returned via callback in Chrome.
     this.pageTitle = 'Sending DOM Scrape...';
     console.log('Scrape completed');
-    this.ref.detectChanges();
     this.analysisSubscription = this.pageAnalysisService.sendScrape(scrape)
       .subscribe(
         response => {
@@ -74,22 +73,19 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
 
   analysisCompleted(analysis: Analysis) {
     console.log(analysis);
-    this.ref.reattach();
     this.pageAnalysisService.storeAnalysis(analysis);
     this.analysis = analysis;
     this.analysisComplete = true;
     this.inProgress = false;
     this.pageTitle = DEFAULT_PAGE_TITLE;
-    this.ref.markForCheck();
   }
 
   resetPage() {
-    this.ref.reattach();
+    console.log('Resetting page');
     this.pageTitle = DEFAULT_PAGE_TITLE;
     this.analysisComplete = false;
     this.inProgress = false;
     this.analysis = null;
-    this.ref.markForCheck();
   }
 
   dismissError() {
@@ -98,14 +94,22 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
     this.resetPage();
   }
 
-  deleteAnalysis() {
-    this.pageAnalysisService.deleteAnalysis();
-    this.resetPage();
+  openModal() {
+    console.log('Open Modal');
+    this.modal.opened = true;
   }
 
-  timeSince(timeStamp) {
+  deleteAnalysis() {
+    console.log('Deleting Analysis');
+    this.pageAnalysisService.deleteAnalysis();
+    this.resetPage();
+    this.modal.opened = false;
+  }
+
+  timeSince(strTimeStamp) {
     const now = new Date(),
-      secondsPast = (now.getTime() - new Date(timeStamp).getTime()) / 1000;
+      timeStamp = new Date(strTimeStamp),
+      secondsPast = (now.getTime() - timeStamp.getTime()) / 1000;
 
     const formatDate = function (date, format, utc = undefined) {
       const MMMM = ['\x00', 'January', 'February', 'March', 'April', 'May', 'June', 'July',

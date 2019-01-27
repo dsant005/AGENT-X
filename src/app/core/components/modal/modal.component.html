@@ -1,0 +1,12 @@
+<clr-modal [(clrModalOpen)]="modal.opened">
+  <h3 class="modal-title">{{title}}</h3>
+  <div class="modal-body">
+    <p>{{message}}</p>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-outline" type="button" (click)="dismiss()">Cancel</button>
+      <button class="btn btn-danger" type="button" (click)="ok()">
+        <clr-icon [attr.shape]="icon" *ngIf="icon"></clr-icon> {{buttonLabel}}
+      </button>
+  </div>
+</clr-modal>

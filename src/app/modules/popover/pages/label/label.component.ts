@@ -13,8 +13,8 @@ export class LabelComponent implements OnInit {
   ngOnInit() {
   }
 
-  startSelectorMode(): void {
-    this.selectorService.startLabelMode();
+  startSelectorMode(type: string): void {
+    this.selectorService.startLabelMode(type);
   }
 
 }

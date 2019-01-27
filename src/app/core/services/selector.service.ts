@@ -7,10 +7,13 @@ export class SelectorService {
 
   constructor() { }
 
-  startLabelMode(): void {
+  startLabelMode(type: string): void {
     chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
       const activeTab = tabs[0];
-      chrome.tabs.sendMessage(activeTab.id, 'startSelectorMode', (msg) => msg.name === 'inSelectorMode' ? window.close() : window.close());
+      chrome.tabs.sendMessage(
+        activeTab.id,
+        { name: 'startSelectorMode', payload: type },
+        (msg) => msg.name === 'inSelectorMode' ? window.close() : window.close());
     });
   }
 
