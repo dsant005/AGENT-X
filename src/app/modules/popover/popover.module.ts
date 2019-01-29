@@ -9,12 +9,16 @@ import { AnalyzeComponent } from '@app/modules/popover/pages/analyze/analyze.com
 import { SettingsComponent } from '@app/modules/popover/pages/settings/settings.component';
 import { LabelComponent } from '@app/modules/popover/pages/label/label.component';
 import { CoreModule } from '@app/core/core.module';
+import { OverlayToggleComponent } from './components/overlay-toggle/overlay-toggle.component';
+import { PageAnalysisTreeComponent } from './components/page-analysis-tree/page-analysis-tree.component';
 
 @NgModule({
   declarations: [
     AnalyzeComponent,
     SettingsComponent,
-    LabelComponent
+    LabelComponent,
+    OverlayToggleComponent,
+    PageAnalysisTreeComponent
   ],
   imports: [
     CommonModule,
@@ -22,6 +26,9 @@ import { CoreModule } from '@app/core/core.module';
     FormsModule,
     BrowserAnimationsModule,
     CoreModule
+  ],
+  exports: [
+    OverlayToggleComponent
   ]
 })
 export class PopoverModule { }

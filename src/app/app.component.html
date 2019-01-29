@@ -12,7 +12,10 @@
                 <button id="tab3" class="btn btn-link nav-link" routerLink="/settings" routerLinkActive="active" type="button">Settings</button>
             </li>
         </ul>
-        <router-outlet></router-outlet>
+        <app-smooth-height [@routeAnimations]="prepareRoute(outlet)" [trigger]="outlet.activatedRouteData">
+            <router-outlet #outlet="outlet"></router-outlet>
+        </app-smooth-height>
+        <app-overlay-toggle></app-overlay-toggle>
     </div>
   </div>
 </div>

@@ -10,6 +10,13 @@
     "web_accessible_resources": [
         "*"
     ],
+    "background": {
+      "scripts": [
+        "jquery.min.js",
+        "background.js"
+      ],
+      "persistent": false
+    },
     "content_scripts": [
         {
           "matches": [
@@ -23,7 +30,7 @@
             "jquery.min.js",
             "scraper.js",
             "selector.js",
-            "background.js"
+            "content.js"
           ]
         }
       ],

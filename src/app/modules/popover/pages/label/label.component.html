@@ -1,13 +1,13 @@
-<div class="card">
-    <div class="card-block">
+<app-card>
+    <div body>
         <h4 class="card-title">Tag an Element</h4>
         <p class="card-text">Choose a candidate tag type to associate with an element below. This interface is also accessible via the Dev Tools.</p>
     </div>
-    <div class="card-footer">
+    <div footer>
         <div class="btn-group btn-primary">
             <button class="btn" (click)="startSelectorMode('label')"><clr-icon shape="plus"></clr-icon> Label</button>
             <button class="btn btn-danger" (click)="startSelectorMode('error')"><clr-icon shape="plus"></clr-icon> Error Message</button>
             <button class="btn btn-success" (click)="startSelectorMode('commit')"><clr-icon shape="plus"></clr-icon> Commit Button</button>
           </div>
     </div>
-</div>
+</app-card>

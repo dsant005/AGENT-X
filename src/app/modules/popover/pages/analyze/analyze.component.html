@@ -1,20 +1,20 @@
-<div class="card" *ngIf="!analysisComplete && !error">
-  <div class="card-block">
+<app-card *ngIf="!analysisComplete && !error">
+  <div header><h4 class="card-title">{{pageTitle}}</h4></div>
+  <div body>
     <div class="progress flash loop top" *ngIf="inProgress">
       <progress value="10" max="100"></progress>
     </div>
-    <h4 class="card-title">{{pageTitle}}</h4>
     <p class="card-text">Analyzing a page transforms the DOM into a special tree and extracts candidates for
       interaction from the page.</p>
   </div>
-  <div class="card-footer">
+  <div footer>
     <button class="btn btn-primary" (click)="analyze()" [disabled]="inProgress">
       <clr-icon shape="tasks"></clr-icon> Analyze
     </button>
   </div>
-</div>
-<div class="card" *ngIf="analysisComplete">
-  <div class="card-header">
+</app-card>
+<app-card *ngIf="analysisComplete">
+  <div header>
     <div class="clr-row clr-align-items-*-center">
       <div class="clr-col-8">
         <span>Analysis Completed</span>
@@ -35,35 +35,13 @@
       </div>
     </div>
   </div>
-  <div class="card-block">
-    <clr-tree-node [clrExpanded]="true">
-      Page Analysis
-      <clr-tree-node>
-        Cancels ({{analysis.cancels.length}})
-        <clr-tree-node *ngFor="let cancel of analysis.cancels">{{cancel}}</clr-tree-node>
-      </clr-tree-node>
-      <clr-tree-node>
-        Commits ({{analysis.commits.length}})
-        <clr-tree-node *ngFor="let commit of analysis.commits">{{commit}}</clr-tree-node>
-      </clr-tree-node>
-      <clr-tree-node>
-        Error Messages ({{analysis.errorMessages.length}})
-        <clr-tree-node *ngFor="let errorMessage of analysis.errorMessages">{{errorMessage}}</clr-tree-node>
-      </clr-tree-node>
-      <clr-tree-node>
-        Label Candidates ({{analysis.labelCandidates.length}})
-        <clr-tree-node *ngFor="let labelCandidate of analysis.labelCandidates">{{labelCandidate}}</clr-tree-node>
-      </clr-tree-node>
-      <clr-tree-node>
-        Page Titles ({{analysis.pageTitles.length}})
-        <clr-tree-node *ngFor="let pageTitle of analysis.pageTitles">{{pageTitle}}</clr-tree-node>
-      </clr-tree-node>
-    </clr-tree-node>
+  <div body>
+    <app-page-analysis-tree [analysis]="analysis"></app-page-analysis-tree>
   </div>
-  <div class="card-footer">
+  <div footer>
     <span>{{timeSince(analysis.timeStamp)}}</span>
   </div>
-</div>
+</app-card>
 <app-error [error]="error" (dismiss)="dismissError()" *ngIf="error"></app-error>
 <app-modal title="Delete this Page Analysis" message="Are you sure you want to perminantly delete this page analysis?"
   icon="trash" (okClick)="deleteAnalysis()" [modal]="modal" buttonLabel="Delete"></app-modal>

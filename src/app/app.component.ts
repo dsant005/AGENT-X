@@ -1,18 +1,21 @@
 import { Component } from '@angular/core';
-import { StorageService } from '@app/core/services/storage.service';
+import { RouterOutlet } from '@angular/router';
+
+import { slideInAnimation } from '@app/core/animations/slide-in';
+import { CaptainsLogService, LOG_LEVEL } from './core/services/captains-log.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  animations: [ slideInAnimation ],
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private storage: StorageService) {
-    // setup initial configuration
-    this.storage.setLocalStorage();
-    const baseUrl = this.storage.get('baseUrl');
-    if (!baseUrl) {
-      this.storage.set('baseUrl', 'http://localhost:9000');
-    }
+  constructor(private captain: CaptainsLogService) {
+    this.captain.logLevel = LOG_LEVEL.DEBUG;
+  }
+
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
 }

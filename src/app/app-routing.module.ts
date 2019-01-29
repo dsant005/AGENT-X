@@ -7,10 +7,10 @@ import { LabelComponent } from '@app/modules/popover/pages/label/label.component
 
 
 const appRoutes: Routes = [
-  { path: '', component: AnalyzeComponent },
-  { path: 'settings',      component: SettingsComponent },
-  { path: 'label',      component: LabelComponent },
-  { path: '**', component: AnalyzeComponent }
+  { path: '', component: AnalyzeComponent, data: {animation: 'Analysis'} },
+  { path: 'settings',      component: SettingsComponent, data: {animation: 'Settings'} },
+  { path: 'label',      component: LabelComponent, data: {animation: 'Label'} },
+  { path: '**', component: AnalyzeComponent, data: {animation: 'Error'} }
 ];
 
 @NgModule({

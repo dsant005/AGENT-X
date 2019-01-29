@@ -1,12 +1,13 @@
-import { Injectable, NgZone } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable} from '@angular/core';
 
 import { Observable, Subject } from 'rxjs';
+import { first } from 'rxjs/operators';
 
-import { ChromeMessage } from '@app/core/models/chrome_message.interface';
 import { Scrape } from '@app/core/models/scrape.interface';
 import { StorageService } from '@app/core/services/storage.service';
-import { Analysis } from '../models/analysis.interface';
+import { Analysis } from '@app/core/models/analysis.interface';
+import { ChromeService } from '@app/core/services/chrome.service';
+import { CaptainsLogService } from '@app/core/services/captains-log.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,59 +16,59 @@ export class PageAnalysisService {
 
   scrape: Subject<Scrape>;
 
-  constructor(private http: HttpClient, private storage: StorageService, private zone: NgZone) {
+  constructor(private storage: StorageService, private chromeService: ChromeService, private captain: CaptainsLogService) {
     this.scrape = new Subject<Scrape>();
     this.storage.setLocalStorage();
   }
 
   getPreviousAnalysis(): Observable<Analysis> {
     const subject = new Subject<Analysis>();
-    chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
-      const activeTab = tabs[0];
-      console.log('getting', activeTab.url);
-      this.zone.run(() => subject.next(this.storage.getObject(activeTab.url)));
+    this.chromeService.queryActiveTab().pipe(first()).subscribe(tab => {
+      const analysis = this.storage.getObject(tab.url);
+      this.captain.log('Found previous analysis', analysis);
+      subject.next(analysis);
     });
     return subject.asObservable();
   }
 
-  storeAnalysis(analysis: Analysis): void {
-    chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
-      const activeTab = tabs[0];
-      console.log('storing', activeTab.url);
-      this.storage.setObject(activeTab.url, analysis);
-    });
+  getAnalysisState(): number {
+    const scraping = this.storage.get('scraping'),
+        analyzing = this.storage.get('analyzing');
+
+    if (scraping) {
+      return 1;
+    } else if (analyzing) {
+      return 2;
+    }
+    return 0;
   }
 
   deleteAnalysis(): void {
-    chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
-      const activeTab = tabs[0];
-      console.log('remove', activeTab.url);
-      this.storage.remove(activeTab.url);
+    this.chromeService.queryActiveTab().pipe(first()).subscribe(tab => {
+      this.captain.log('Found tab, removing store', tab.url);
+      this.storage.remove(tab.url);
     });
   }
 
-  sendScrape(scrape: Scrape): Observable < any > {
-    const cleanBody = unescape(encodeURIComponent(JSON.stringify(scrape)));
-    return this.http.post(`${this.storage.get('baseUrl')}/v1/pageAnalysis/state/concrete`, cleanBody);
+  analyzePage(): void {
+    this.chromeService.sendMessage({ name: 'startPageScrape', payload: null });
   }
 
-  analyzePage(): Observable < Scrape > {
-    chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
-      const activeTab = tabs[0];
-      chrome.tabs.sendMessage(activeTab.id, { name: 'startPageAnalysis' }, (msg) => this.completeScrape(msg));
+  subscribeToScrapes(): Observable<Scrape> {
+    const subject = new Subject<Scrape>();
+    this.chromeService.listenForMessage('completePageAnalysis').subscribe(msg => {
+      this.captain.log('Found new scrape', JSON.stringify(msg));
+      subject.next(msg.payload as Scrape);
     });
-    return this.scrape;
+    return subject.asObservable();
   }
 
-  completeScrape(msg: ChromeMessage): void {
-    console.log('Response', msg);
-    if (msg) {
-      switch (msg.name) {
-        case 'completePageAnalysis':
-          console.log('Publishing response', msg.payload);
-          this.zone.run(() => this.scrape.next(msg.payload));
-          break;
-      }
-    }
+  subscribeToAnalysis(): Observable<Analysis> {
+    const subject = new Subject<Analysis>();
+    this.chromeService.listenForMessage('analysisRecieved').subscribe(msg => {
+      this.captain.log('Found new analysis', JSON.stringify(msg));
+      subject.next(msg.payload.analysis as Analysis);
+    });
+    return subject.asObservable();
   }
 }
