@@ -31,14 +31,21 @@ export class PageAnalysisService {
     return subject.asObservable();
   }
 
-  getAnalysisState(): number {
-    const scraping = this.storage.get('scraping'),
-        analyzing = this.storage.get('analyzing');
+  getPreviousScrape(): Observable<Scrape> {
+    const subject = new Subject<Scrape>();
+    this.chromeService.queryActiveTab().pipe(first()).subscribe(tab => {
+      const analysis = this.storage.getObject('a' + tab.url);
+      this.captain.log('Found previous scrape', analysis);
+      subject.next(analysis);
+    });
+    return subject.asObservable();
+  }
 
-    if (scraping) {
-      return 1;
-    } else if (analyzing) {
-      return 2;
+  getAnalysisState(): number {
+    const state = this.storage.get('app_state');
+
+    if (state) {
+      return parseInt(state, 10);
     }
     return 0;
   }

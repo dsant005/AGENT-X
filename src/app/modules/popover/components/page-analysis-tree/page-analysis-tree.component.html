@@ -1,8 +1,23 @@
 <clr-tree-node [clrExpanded]="true">
   Page Analysis
-  <app-tree-node name="Cancels" [list]="analysis.cancels"></app-tree-node>
-  <app-tree-node name="Commits" [list]="analysis.commits"></app-tree-node>
-  <app-tree-node name="Error Messages" [list]="analysis.errorMessages"></app-tree-node>
-  <app-tree-node name="Label Candidates" [list]="analysis.labelCandidates"></app-tree-node>
-  <app-tree-node name="Page Titles" [list]="analysis.pageTitles"></app-tree-node>
+  <clr-tree-node>
+    Cancels ({{analysis.cancels.length}})
+    <clr-tree-node *ngFor="let item of analysis.cancels">{{item}}</clr-tree-node>
+  </clr-tree-node>
+  <clr-tree-node>
+    Commits ({{analysis.commits.length}})
+    <clr-tree-node *ngFor="let item of analysis.commits">{{item}}</clr-tree-node>
+  </clr-tree-node>
+  <clr-tree-node>
+    Error Messages ({{analysis.errorMessages.length}})
+    <clr-tree-node *ngFor="let item of analysis.errorMessages">{{item}}</clr-tree-node>
+  </clr-tree-node>
+  <clr-tree-node>
+    Label Candidates ({{analysis.labelCandidates.length}})
+    <clr-tree-node *ngFor="let item of analysis.labelCandidates">{{item}}</clr-tree-node>
+  </clr-tree-node>
+  <clr-tree-node>
+    Page Titles ({{analysis.pageTitles.length}})
+    <clr-tree-node *ngFor="let item of analysis.pageTitles">{{item}}</clr-tree-node>
+  </clr-tree-node>
 </clr-tree-node>

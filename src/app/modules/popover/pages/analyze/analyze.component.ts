@@ -8,6 +8,7 @@ import { Error } from '@app/core/models/error.model';
 import { Analysis } from '@app/core/models/analysis.interface';
 import { DateTimeService } from '@app/core/services/date-time.service';
 import { CaptainsLogService } from '@app/core/services/captains-log.service';
+import { OverlayService } from '@app/core/services/overlay.service';
 
 const DEFAULT_PAGE_TITLE = 'Analyze this Page';
 
@@ -27,7 +28,8 @@ export class AnalyzeComponent implements OnInit {
   constructor(
     private pageAnalysisService: PageAnalysisService,
     private dateTimeService: DateTimeService,
-    private captain: CaptainsLogService) { }
+    private captain: CaptainsLogService,
+    private overlayService: OverlayService) { }
 
   ngOnInit() {
     this.pageAnalysisService.getPreviousAnalysis().subscribe(analysis => {

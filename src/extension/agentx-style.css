@@ -37,3 +37,51 @@
 .agentx-tag.agentx-commit {
     background-color: #2f8400;
 }
+
+.agentx-marker {
+    position:absolute;
+    z-index: 9999;
+    border: 1px solid white;
+}
+
+.agentx-marker:hover {
+    opacity:0.85;
+    border-radius:2px;
+}
+
+.agentx-marker.commits {
+    border:3px solid rgb(55, 141, 57);
+}
+
+.agentx-marker.cancels {
+    border:3px solid rgb(173, 175, 19);
+}
+
+.agentx-marker.errorMessages {
+    border:3px solid rgb(145, 39, 39);
+}
+
+.agentx-marker.labelCandidates {
+    border:3px solid rgb(38, 63, 146);
+}
+
+.agentx-marker.pageTitles {
+    border:3px solid rgb(138, 55, 141);
+}
+
+.agentx-banner {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    position:absolute;
+    top: 100px;
+    left:50%;
+    width: 780px;
+    margin-left:-370px;
+    background-color: rgba(0,0,0,0.85);
+    color: #fff;
+    padding:15px 25px;
+    font-size: 32px;
+    text-align:center;
+    z-index: 9999;
+    border: 1px solid #fff;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+}

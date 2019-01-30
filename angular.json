@@ -27,6 +27,8 @@
               "src/assets",
               { "glob": "*", "input": "src/extension", "output": "./" },
               { "glob": "jquery.min.js", "input": "node_modules/jquery/dist", "output": "./" },
+              { "glob": "tooltipster.bundle.min.js", "input": "node_modules/tooltipster/dist/js", "output": "./" },
+              { "glob": "tooltipster.bundle.min.css", "input": "node_modules/tooltipster/dist/css", "output": "./" },
               "src/manifest.json"
             ],
             "styles": [

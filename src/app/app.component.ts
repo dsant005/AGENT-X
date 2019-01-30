@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { slideInAnimation } from '@app/core/animations/slide-in';
-import { CaptainsLogService, LOG_LEVEL } from './core/services/captains-log.service';
+import { CaptainsLogService, LOG_LEVEL } from '@app/core/services/captains-log.service';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +11,7 @@ import { CaptainsLogService, LOG_LEVEL } from './core/services/captains-log.serv
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
   constructor(private captain: CaptainsLogService) {
     this.captain.logLevel = LOG_LEVEL.DEBUG;
   }

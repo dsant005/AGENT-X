@@ -24,12 +24,15 @@
             "https://*/*"
           ],
           "css": [
-            "agentx-style.css"
+            "agentx-style.css",
+            "tooltipster.bundle.min.css"
           ],
           "js": [
             "jquery.min.js",
+            "tooltipster.bundle.min.js",
             "scraper.js",
             "selector.js",
+            "overlay.js",
             "content.js"
           ]
         }
