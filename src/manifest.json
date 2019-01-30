@@ -13,6 +13,11 @@
     "background": {
       "scripts": [
         "jquery.min.js",
+        "shared-config.js",
+        "shared-logger.js",
+        "shared-storage.js",
+        "shared-chrome.js",
+        "background-service.js",
         "background.js"
       ],
       "persistent": false

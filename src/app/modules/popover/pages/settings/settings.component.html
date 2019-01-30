@@ -1,6 +1,6 @@
 <app-card>
+  <div header><h4 class="card-title">Change User Settings</h4></div>
   <div body>
-    <h4 class="card-title">Change User Settings</h4>
     <div class="alert alert-warning" role="alert">
       <div class="alert-items">
         <div class="alert-item static">
@@ -16,17 +16,8 @@
     <form clrForm>
       <clr-input-container>
         <label>Page Analysis API Host</label>
-        <input clrInput type="text" name="example" placeholder="http://localhost:9000/"  size="35" />
+        <input clrInput type="text" name="example" [(ngModel)]="host" (change)="update()"  size="35" />
       </clr-input-container>
-      <section class="form-block">
-        <div class="form-group">
-          <label>Keyboard Shortcuts</label>
-          <div class="toggle-switch">
-            <input type="checkbox" id="toggle_6">
-            <label for="toggle_6"></label>
-          </div>
-        </div>
-      </section>
     </form>
   </div>
 </app-card>

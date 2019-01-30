@@ -14,11 +14,11 @@
     z-index: 99999;
 }
 
-.agentx-active.agentx-label {
+.agentx-active.agentx-labelCandidate {
     border-color: #0079b8 !important;
 }
 
-.agentx-active.agentx-error {
+.agentx-active.agentx-errorMessage {
     border-color: #e12200 !important;
 }
 
@@ -26,11 +26,11 @@
     border-color: #2f8400 !important;
 }
 
-.agentx-tag.agentx-label {
+.agentx-tag.agentx-labelCandidate {
     background-color: #0079b8;
 }
 
-.agentx-tag.agentx-error {
+.agentx-tag.agentx-errorMessage {
     background-color: #e12200;
 }
 

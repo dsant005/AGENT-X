@@ -1,17 +1,5 @@
-window.agentx_selector = (type, baseUrl) => {
+window.agentx_selector = (type) => {
     console.log('selector')
-
-    function sendAJAX(route, payload, baseUrl) {
-        return new Promise(function(resolve, reject) {
-        $.ajax({
-            type: "POST",
-            url: baseUrl + route,
-            contentType: "application/json; charset=utf-8",
-            data: unescape(encodeURIComponent(JSON.stringify(payload)))})
-                .then(response => resolve(response))
-                .catch(err => reject(err));
-        });
-    }
 
     $('body').find(':visible').each(function() {
         $(this).on('mouseover.agentx', function(e) {
@@ -33,8 +21,8 @@ window.agentx_selector = (type, baseUrl) => {
         })
         $(this).click(function(e) {
             e.stopPropagation();
-            // do ajax here
-            sendAJAX('', s);
+            console.log('Clicked', $(this));
+            chrome.runtime.sendMessage({ name: 'sendElementForTraining', payload: { id: $(this).data('widgetid'), url: window.location.href, type: type }});
             return false;
         })
 
@@ -59,7 +47,7 @@ window.agentx_selector = (type, baseUrl) => {
 
     showBanner('Label Mode Active: Press the Escape key to exit.');
 
-    document.onkeydown = function(e) {
+    $(document).on('keydown', function(e) {
         if (e.key === 'Escape') {
             $('.agentx-tag').remove();
             $('body')
@@ -68,6 +56,7 @@ window.agentx_selector = (type, baseUrl) => {
             $('.agentx-active')
                 .removeClass('agentx-active');
             showBanner('Label Mode Off.');
+            $(document).off("keydown");
         }
-      };
+      });
 };
