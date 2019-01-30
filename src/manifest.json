@@ -35,9 +35,12 @@
           "js": [
             "jquery.min.js",
             "tooltipster.bundle.min.js",
-            "scraper.js",
-            "selector.js",
-            "overlay.js",
+            "shared-config.js",
+            "shared-logger.js",
+            "shared-chrome.js",
+            "content-scraper.js",
+            "content-selector.js",
+            "content-overlay.js",
             "content.js"
           ]
         }

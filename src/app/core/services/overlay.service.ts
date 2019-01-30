@@ -5,7 +5,6 @@ import { PageAnalysisService } from './page-analysis.service';
 import { first } from 'rxjs/operators';
 
 const OVERLAY_ENABLED = 'overlayEnabled',
-      OVERLAY_PAINTED = 'overlayPainted',
       START_OVERLAY = 'paintOverlay',
       DISABLE_OVERLAY = 'clearOverlay';
 
@@ -42,7 +41,6 @@ export class OverlayService {
             payload: {
               analysis: analysis,
               scrape: scrape } });
-          this.storage.get(OVERLAY_PAINTED + scrape.url);
         });
       });
     }

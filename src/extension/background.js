@@ -21,12 +21,19 @@
       case CONFIG.REQUEST_DATA_FOR_PAINT:
         LOGGER.log('Request for last Analysis', request)
         let analysis = BACKGROUND_SERVICE.getLastAnalysis(request.payload);
-        sendResponse({ name: CONFIG.LAST_ANALYSIS, payload: {
-              analysis: analysis }});
+        sendResponse({
+          name: CONFIG.LAST_ANALYSIS,
+          payload: {
+            analysis: analysis
+          }
+        });
         break;
       case CONFIG.SEND_ELEMENT_FOR_TRAINING:
         LOGGER.log('Sending element for training', request);
-        BACKGROUND_SERVICE.sendForTraining(request.payload.id, request.payload.url, request.payload.type);
+        BACKGROUND_SERVICE.sendForTraining(
+          request.payload.id,
+          request.payload.url,
+          request.payload.type);
         break;
       default:
         LOGGER.log('Unknown event', request, sender);
@@ -34,5 +41,5 @@
     }
   });
 
-  LOGGER.log('Background loaded.')
+  LOGGER.log('loaded.')
 })();
