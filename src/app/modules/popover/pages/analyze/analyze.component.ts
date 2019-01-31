@@ -70,12 +70,10 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
   }
 
   openModal() {
-    console.log('Open Modal');
     this.modal.opened = true;
   }
 
   deleteAnalysis() {
-    console.log('Deleting Analysis');
     this.pageAnalysisService.deleteAnalysis();
     this.resetPage();
     this.modal.opened = false;
@@ -98,7 +96,6 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
   }
 
   protected analysisCompleted(analysis: Analysis) {
-    console.log(analysis);
     this.analysis = analysis;
     this.analysisComplete = true;
     this.inProgress = false;
@@ -106,7 +103,6 @@ export class AnalyzeComponent implements OnInit, OnDestroy {
   }
 
   protected resetPage() {
-    console.log('Resetting page');
     this.pageTitle = DEFAULT_PAGE_TITLE;
     this.analysisComplete = false;
     this.inProgress = false;

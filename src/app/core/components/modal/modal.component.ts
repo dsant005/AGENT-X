@@ -20,17 +20,13 @@ export class ModalComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     const modal: SimpleChange = changes.modal;
-    console.log('prev value: ', modal.previousValue);
-    console.log('got name: ', modal.currentValue);
   }
 
   ok() {
-    console.log('ok');
     this.okClick.emit();
   }
 
   dismiss() {
-    console.log('dismiss');
     this.modal.opened = false;
   }
 

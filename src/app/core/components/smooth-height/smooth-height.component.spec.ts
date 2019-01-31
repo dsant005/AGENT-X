@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SmoothHeightComponent } from './smooth-height.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('SmoothHeightComponent', () => {
   let component: SmoothHeightComponent;
@@ -8,6 +9,7 @@ describe('SmoothHeightComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [BrowserAnimationsModule],
       declarations: [ SmoothHeightComponent ]
     })
     .compileComponents();
