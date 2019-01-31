@@ -2,6 +2,8 @@
 
 AGENT-X is the label helper component for AGENT, once installed in Chrome it allows for the labeling of HTML elements for training.
 
+![Alt Text](documentation/intro.gif)
+
 ### Installation
 
 To install AGENT-X follow the steps below:
