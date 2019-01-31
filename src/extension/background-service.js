@@ -18,11 +18,16 @@ window.AgentxBackgroundService = function (STORAGE, LOGGER) {
             scrape: scrape
           });
         }
-      }).catch(err => {
-        LOGGER.error(err);
-        CHROME.sendRuntimeMessage(CONFIG.ANALYSIS_FAILURE, null);
+      }).catch(e => {
+        LOGGER.error(e);
+        const err = {
+          heading: 'Analysis Failed',
+          message: 'Failed to send scrape of DOM to server, please make sure your PageAnalysis service is running and the appropriate host is provided in settings.'
+        };
+        STORAGE.setError(err);
+        CHROME.sendRuntimeMessage(CONFIG.ERROR_MESSAGE, err);
       });
-  }
+  };
 
   this.getLastAnalysis = (url) => {
     if (STORAGE.isOverlayEnabled()) {
@@ -30,7 +35,7 @@ window.AgentxBackgroundService = function (STORAGE, LOGGER) {
       return analysis;
     }
     return null;
-  }
+  };
 
   this.sendForTraining = (id, url, type) => {
     const lastScrape = STORAGE.getScrape(url);
@@ -43,10 +48,24 @@ window.AgentxBackgroundService = function (STORAGE, LOGGER) {
       state: lastScrape
     }).then(response => {
       LOGGER.log(response);
-    }).catch(err => {
-      LOGGER.error(err);
+    }).catch(e => {
+      LOGGER.error(e);
+      const err = {
+        heading: 'Training Failed',
+        message: 'Failed to send training to server, please make sure your PageAnalysis service is running and the appropriate host is provided in settings.'
+      };
+      STORAGE.setError(err);
+      CHROME.sendRuntimeMessage(CONFIG.ERROR_MESSAGE, err);
     });
-  }
+  };
+
+  this.copyScrape = () => {
+    CHROME.sendActiveTabMessage(CONFIG.ACTIVE_URL, null).then((url) => {
+      const lastScrape = STORAGE.getScrape(url);
+      LOGGER.log('Found scrape for copy', lastScrape);
+      CHROME.sendActiveTabMessage(CONFIG.COPY_SCRAPE, lastScrape);
+    });
+  };
 
   function sendAJAX(route, payload) {
     return new Promise(function (resolve, reject) {

@@ -37,4 +37,8 @@ export class ChromeService {
     });
     return subject.asObservable();
   }
+
+  sendRuntimeMessage(message: ChromeMessage): void {
+    chrome.runtime.sendMessage(message);
+  }
 }

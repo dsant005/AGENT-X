@@ -1,4 +1,6 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
+import { Subscription } from 'rxjs';
 
 import { Error } from '@app/core/models/error.model';
 
@@ -8,26 +10,16 @@ import { Error } from '@app/core/models/error.model';
   styleUrls: ['./error.component.scss']
 })
 export class ErrorComponent implements OnInit {
-  private _error: Error;
-
-  @Output() dismiss = new EventEmitter();
+  @Input() error: Error;
+  @Output() dismissError = new EventEmitter<any>();
+  msgSubscription: Subscription;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  get error(): Error {
-    return this._error;
-  }
-
-  @Input()
-  set error(val: Error) {
-    this._error = val;
-  }
-
   hide() {
-    this.dismiss.emit();
+    this.dismissError.emit({});
   }
-
 }

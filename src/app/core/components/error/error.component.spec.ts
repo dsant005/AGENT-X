@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ClarityModule } from '@clr/angular';
 
 import { ErrorComponent } from './error.component';
 
@@ -8,6 +9,7 @@ describe('ErrorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ClarityModule],
       declarations: [ ErrorComponent ]
     })
     .compileComponents();

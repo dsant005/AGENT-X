@@ -3,18 +3,19 @@
     <div class="content-area">
         <ul id="demoTabs" class="nav" role="tablist">
             <li role="presentation" class="nav-item">
-                <button id="tab1" class="btn btn-link nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" type="button">Analyze</button>
+                <button id="tab1" class="btn btn-link nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" type="button" [disabled]="error !== null">Analyze</button>
             </li>
             <li role="presentation" class="nav-item">
-                <button id="tab2" class="btn btn-link nav-link" routerLink="/label" routerLinkActive="active" type="button">Label Candidates</button>
+                <button id="tab2" class="btn btn-link nav-link" routerLink="/label" routerLinkActive="active" type="button" [disabled]="error !== null">Label Candidates</button>
             </li>
             <li role="presentation" class="nav-item">
-                <button id="tab3" class="btn btn-link nav-link" routerLink="/settings" routerLinkActive="active" type="button">Settings</button>
+                <button id="tab3" class="btn btn-link nav-link" routerLink="/settings" routerLinkActive="active" type="button" [disabled]="error !== null">Settings</button>
             </li>
         </ul>
-        <app-smooth-height [@routeAnimations]="prepareRoute(outlet)" [trigger]="outlet.activatedRouteData">
+        <app-smooth-height *ngIf="!error" [@routeAnimations]="prepareRoute(outlet)" [trigger]="outlet.activatedRouteData">
             <router-outlet #outlet="outlet"></router-outlet>
         </app-smooth-height>
+        <app-error *ngIf="error" [error]="error" (dismissError)="dismissError()"></app-error>
         <app-overlay-toggle></app-overlay-toggle>
     </div>
   </div>

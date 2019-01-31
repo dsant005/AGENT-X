@@ -4,11 +4,9 @@ import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
 
 import { PageAnalysisService } from '@app/core/services/page-analysis.service';
-import { Error } from '@app/core/models/error.model';
 import { Analysis } from '@app/core/models/analysis.interface';
 import { DateTimeService } from '@app/core/services/date-time.service';
 import { CaptainsLogService } from '@app/core/services/captains-log.service';
-import { OverlayService } from '@app/core/services/overlay.service';
 
 const DEFAULT_PAGE_TITLE = 'Analyze this Page';
 
@@ -17,48 +15,57 @@ const DEFAULT_PAGE_TITLE = 'Analyze this Page';
   templateUrl: './analyze.component.html',
   styleUrls: ['./analyze.component.scss']
 })
-export class AnalyzeComponent implements OnInit {
+export class AnalyzeComponent implements OnInit, OnDestroy {
   public pageTitle = DEFAULT_PAGE_TITLE;
   public inProgress = false;
   public analysisComplete = false;
-  public error: Error;
   public analysis: Analysis;
   public modal = { opened: false };
+
+  private analysisSubscription: Subscription;
+  private scrapeSubscription: Subscription;
 
   constructor(
     private pageAnalysisService: PageAnalysisService,
     private dateTimeService: DateTimeService,
-    private captain: CaptainsLogService,
-    private overlayService: OverlayService) { }
+    private captain: CaptainsLogService) { }
 
   ngOnInit() {
-    this.pageAnalysisService.getPreviousAnalysis().subscribe(analysis => {
+    this.pageAnalysisService.getPreviousAnalysis().pipe(first()).subscribe(analysis => {
       if (analysis) {
         this.analysisCompleted(analysis);
-        this.captain.log('Init popover with existing Analysis', this.analysis);
+        this.captain.debug('Init popover with existing Analysis', this.analysis);
       }
     });
+    this.scrapeSubscription = this.pageAnalysisService.subscribeToScrapes().subscribe(
+      scrape => this.analyzing(),
+      err => {
+        this.resetPage();
+      });
+    this.analysisSubscription = this.pageAnalysisService.subscribeToAnalysis().subscribe(
+      analysis => this.analysisCompleted(analysis as Analysis),
+      err => {
+        this.resetPage();
+      });
     const state = this.pageAnalysisService.getAnalysisState();
     if (state === 1) {
       this.scraping();
-      this.subscribeToScrape();
-      this.subscribeToAnalysis();
     } else if (state === 2) {
       this.analyzing();
-      this.subscribeToAnalysis();
     }
+  }
+
+  ngOnDestroy() {
+    this.analysisSubscription.unsubscribe();
+    this.scrapeSubscription.unsubscribe();
   }
 
   analyze(): void {
     this.pageAnalysisService.analyzePage();
-    this.subscribeToScrape();
-    this.subscribeToAnalysis();
     this.scraping();
   }
 
   dismissError() {
-    console.log('Dismissed');
-    this.error = null;
     this.resetPage();
   }
 
@@ -72,6 +79,10 @@ export class AnalyzeComponent implements OnInit {
     this.pageAnalysisService.deleteAnalysis();
     this.resetPage();
     this.modal.opened = false;
+  }
+
+  copyScrape() {
+    this.pageAnalysisService.copyScrape();
   }
 
   protected scraping(): void {
@@ -104,28 +115,5 @@ export class AnalyzeComponent implements OnInit {
 
   protected timeSince(timeStamp: string): string {
     return this.dateTimeService.timeSince(timeStamp);
-  }
-
-  protected subscribeToScrape(): void {
-    this.pageAnalysisService.subscribeToScrapes().pipe(first()).subscribe(
-      scrape => this.analyzing(),
-      err => {
-        this.error = {
-          heading: 'Error',
-          message: 'An error occured while scraping the page, if ' +
-            'you believe this is a bug you can report this error with a link to the page in Github.'
-        };
-      });
-  }
-
-  protected subscribeToAnalysis(): void {
-    this.pageAnalysisService.subscribeToAnalysis().pipe(first()).subscribe(
-      analysis => this.analysisCompleted(analysis as Analysis),
-      err => {
-        this.error = {
-          heading: 'Error',
-          message: 'An error occured while sending the DOM scrape for analysis, please try again later.'
-        };
-      });
   }
 }

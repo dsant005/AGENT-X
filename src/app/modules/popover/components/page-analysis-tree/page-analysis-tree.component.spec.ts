@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PageAnalysisTreeComponent } from './page-analysis-tree.component';
+import { CoreModule } from '@app/core/core.module';
+import { ClarityModule } from '@clr/angular';
 
 describe('PageAnalysisTreeComponent', () => {
   let component: PageAnalysisTreeComponent;
@@ -8,6 +10,7 @@ describe('PageAnalysisTreeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [CoreModule, ClarityModule],
       declarations: [ PageAnalysisTreeComponent ]
     })
     .compileComponents();

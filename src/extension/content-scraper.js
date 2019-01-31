@@ -472,6 +472,15 @@ function get_host_from_url(url) {
   return parser.hostname;
 }
 
+window.agentx_copy_scrape = function(scrape) {
+    let tempInput  = document.createElement("input");
+    document.body.appendChild(tempInput);
+    tempInput.setAttribute('value', JSON.stringify(scrape));
+    tempInput.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempInput);
+}
+
 window.aist_scrape = function () {
   let data = {
     url: "",

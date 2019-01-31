@@ -51,4 +51,9 @@ window.AgentxStorage = function (store) {
     LOGGER.debug('Setting OverlayEnabled to value', value);
     storage.setItem(CONFIG.OVERLAY_ENABLED, value)
   }
+
+  this.setError = (error) => {
+    LOGGER.debug('Setting errorMessage to value', error);
+    setObject(CONFIG.ERROR_MESSAGE, error);
+  }
 }

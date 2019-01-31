@@ -10,7 +10,6 @@ window.agentxConfig = {
 
   // Event Names
   ANALYSIS_RECIEVED: 'analysisRecieved',
-  ANALYSIS_FAILURE: 'analysisFailure',
   START_OVERLAY: 'paintOverlay',
   OVERLAY_DISABLED: 'overlayDisabled',
   COMPLETE_PAGE_SCRAPE: 'completePageScrape',
@@ -20,5 +19,8 @@ window.agentxConfig = {
   START_PAGE_SCRAPE: 'startPageScrape',
   START_SELECTOR_MODE: 'startSelectorMode',
   SELECTOR_MODE_ACTIVE: 'inSelectorMode',
-  DISABLE_OVERLAY: 'clearOverlay'
+  DISABLE_OVERLAY: 'clearOverlay',
+  COPY_SCRAPE: 'copyScrape',
+  ACTIVE_URL: 'getActiveURL',
+  ERROR_MESSAGE: 'errorMessage'
 }

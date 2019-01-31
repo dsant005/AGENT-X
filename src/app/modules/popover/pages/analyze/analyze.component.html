@@ -1,5 +1,7 @@
-<app-card *ngIf="!analysisComplete && !error">
-  <div header><h4 class="card-title">{{pageTitle}}</h4></div>
+<app-card *ngIf="!analysisComplete">
+  <div header>
+    <h4 class="card-title">{{pageTitle}}</h4>
+  </div>
   <div body>
     <div class="progress flash loop top" *ngIf="inProgress">
       <progress value="10" max="100"></progress>
@@ -22,15 +24,23 @@
       <div class="clr-col-4 align-right">
         <span>
           <clr-tooltip>
+            <button class="btn btn-primary btn-icon float-right btn-sm" (click)="copyScrape()" [disabled]="inProgress">
+              <clr-icon shape="copy-to-clipboard"></clr-icon>
+              <clr-tooltip-content clrPosition="bottom-left" clrSize="md" *clrIfOpen>Copy Scrape to Clipboard.</clr-tooltip-content>
+            </button>
+          </clr-tooltip>
+          <clr-tooltip>
             <button class="btn btn-primary btn-icon float-right btn-sm" (click)="analyze()" [disabled]="inProgress">
               <clr-icon shape="refresh"></clr-icon>
               <clr-tooltip-content clrPosition="bottom-left" clrSize="md" *clrIfOpen>Run analysis on this page again.</clr-tooltip-content>
             </button></clr-tooltip>
-          <clr-tooltip><button class="btn btn-danger btn-icon float-right btn-sm" (click)="openModal()" [disabled]="inProgress">
+          <clr-tooltip>
+            <button class="btn btn-danger btn-icon float-right btn-sm" (click)="openModal()" [disabled]="inProgress">
               <clr-icon shape="trash"></clr-icon>
               <clr-tooltip-content clrPosition="bottom-left" clrSize="md" *clrIfOpen>Delete Page Analysis for this
                 page.</clr-tooltip-content>
-            </button></clr-tooltip>
+            </button>
+          </clr-tooltip>
         </span>
       </div>
     </div>
@@ -42,6 +52,5 @@
     <span>{{timeSince(analysis.timeStamp)}}</span>
   </div>
 </app-card>
-<app-error [error]="error" (dismiss)="dismissError()" *ngIf="error"></app-error>
 <app-modal title="Delete this Page Analysis" message="Are you sure you want to perminantly delete this page analysis?"
   icon="trash" (okClick)="deleteAnalysis()" [modal]="modal" buttonLabel="Delete"></app-modal>

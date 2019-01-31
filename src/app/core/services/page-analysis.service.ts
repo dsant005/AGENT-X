@@ -61,6 +61,10 @@ export class PageAnalysisService {
     this.chromeService.sendMessage({ name: 'startPageScrape', payload: null });
   }
 
+  copyScrape(): void {
+    this.chromeService.sendRuntimeMessage({name: 'copyScrape', payload: null});
+  }
+
   subscribeToScrapes(): Observable<Scrape> {
     const subject = new Subject<Scrape>();
     this.chromeService.listenForMessage('completePageAnalysis').subscribe(msg => {

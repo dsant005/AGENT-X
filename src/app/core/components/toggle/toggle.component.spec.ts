@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ToggleComponent } from './toggle.component';
+import { ClarityModule } from '@clr/angular';
 
 describe('ToggleComponent', () => {
   let component: ToggleComponent;
@@ -8,6 +9,7 @@ describe('ToggleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ClarityModule],
       declarations: [ ToggleComponent ]
     })
     .compileComponents();
