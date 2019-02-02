@@ -6,6 +6,7 @@ window.AgentxOverlay = function () {
   this.clear = () => {
     if ($('.agentx-overlay').length > 0) {
       $('.agentx-overlay').remove();
+      $('.tooltipstered').tooltipster('destroy');
       $('.tooltipstered').removeClass('tooltipstered');
     }
   }
