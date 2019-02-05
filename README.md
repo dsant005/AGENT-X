@@ -48,3 +48,20 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 ### Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Contributors
+
+* David Adamo
+* Patrick Alt
+* Keith Briggs
+* Nicolette Celli
+* Philip Daye
+* Tariq King
+* Justin Phillips
+* Dionny Santiago
+
+## Acknowledgements
+
+* Michael Mattera
+* Brian Muras
+* Robert Vanderwall
