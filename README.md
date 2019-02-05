@@ -19,7 +19,7 @@ To install AGENT-X follow the steps below:
 
 ## User Guide
 
-For a description of the architecture and design of AGENT-X and the associated AGENT project, read the [Autonomous Generation and Exploration System (Agent) and Agent-X User's Guide](./documentation/user_guide.md).
+For a description of the architecture and design of AGENT-X and the associated AGENT project, read the [AI Generation and Exploration in Test System (Agent) and Agent-X User's Guide](./documentation/user_guide.md).
 
 ## Development
 
