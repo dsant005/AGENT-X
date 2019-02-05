@@ -53,7 +53,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 Adamo, David   
 Alt, Patrick   
-Briggs, Keith 
+Briggs, Keith   
 Celli, Nicolette   
 Clarke, Peter J.   
 Daye, Philip   
