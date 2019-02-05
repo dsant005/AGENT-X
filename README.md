@@ -60,3 +60,10 @@ Daye, Philip
 King, Tariq   
 Phillips, Justin   
 Santiago, Dionny   
+
+## References
+Santiago, D. (2018). A model-based AI-driven test generation system (Unpublished master's thesis). Miami, Florida, Florida International University. Retrieved February 5, 2019.
+
+Santiago, D., Clarke, P. J., Alt, P., & King, T. M. (2018). Abstract flow learning for web application test generation. Proceedings of the 9th ACM SIGSOFT International Workshop on Automating TEST Case Design, Selection, and Evaluation - A-TEST 2018, 49-55. doi:10.1145/3278186.3278194
+
+Santiago, D., King, T., & Clarke, P. (2018). AI-driven test generation: Machine learning from human testers. 37th Annual Pacific NW Software Quality Conference.
