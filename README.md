@@ -51,17 +51,10 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Contributors
 
-* David Adamo
-* Patrick Alt
-* Keith Briggs
-* Nicolette Celli
-* Philip Daye
-* Tariq King
 * Justin Phillips
+* Patrick Alt
+* David Adamo
+* Philip Daye
+* Keith Briggs
+* Tariq King
 * Dionny Santiago
-
-## Acknowledgements
-
-* Michael Mattera
-* Brian Muras
-* Robert Vanderwall
