@@ -56,5 +56,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 * David Adamo
 * Philip Daye
 * Keith Briggs
-* Tariq King
 * Dionny Santiago
+* Tariq King
