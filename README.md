@@ -1,4 +1,4 @@
-# ![AGENT-X Logo](documentation/agent-x-logo.png) AGENT-X
+# ![AGENT-X Logo](documentation/agent-x-logo-blue.png) AGENT-X
 
 AGENT-X is the label helper component for [AGENT](https://github.com/UltimateSoftware/AGENT), once installed in Chrome it allows for the labeling of HTML elements for training.
 
